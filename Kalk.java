@@ -1,4 +1,4 @@
-// Version 1.0
+//Version 1.11
 
 import java.util.Scanner;
 
@@ -8,37 +8,37 @@ public class Kalk {
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Podaj pierwszą liczbę");
-        double liczba1 = scan.nextInt();
-        scan.nextLine(); //potrzebne, jeśli wczytujemy napis po wczytaniu liczby
+        double liczba1 = scan.nextDouble();
+        //potrzebne, jeśli wczytujemy napis po wczytaniu liczby
+        scan.nextLine();
 
-        System.out.println("Podaj operator + - * /");
+        //Pobranie od użytkownika liczby jakie działanie ma zostać wykonane
+        System.out.println("1 - Dodawanie \n2 - Odejmowanie \n3 - Mnożenie \n4 - Dzielenie ");
+        System.out.println("Wybierz jakie działanie chcesz wykonać:");
         new Scanner(System.in);
-        String operator = scan.nextLine();
+        int operator = scan.nextInt();
+
+        //Zabezpieczenie przed wprowadzaniem złej wartości, powyżej 4
+        while (operator>4){
+            System.out.println("Podałeś zły operator, podaj prawidłowy operator");
+            System.out.println("1 - Dodawanie \n2 - Odejmowanie \n3 - Mnożenie \n4 - Dzielenie ");
+            new Scanner(System.in);
+            operator = scan.nextInt();
+        }
 
         System.out.println("Podaj drugą liczbę");
         new Scanner(System.in);
-        double liczba2 = scan.nextInt();
+        double liczba2 = scan.nextDouble();
         scan.close();
 
-        if (operator.equals("+")) {                    //Wykonaj dodawanie
-            double suma = liczba1 + liczba2;
-            System.out.println("Wynik to " + suma);
-
-        }   else if (operator.equals("-")){             //Wykonaj odejmowanie;
-            double suma = liczba1 - liczba2;
-            System.out.println("Wynik to " + suma);
-
-        }   else if (operator.equals("*")) {            //Wykonaj mnożenie;
-            double suma = liczba1 * liczba2;
-            System.out.println("Wynik to " + suma);
-
-        }   else if (operator.equals("/")){             //Wykonaj dzielenie
-            double suma = liczba1 / liczba2;
-            System.out.println("Wynik to " + suma);
-
-        }   else {System.out.println("Podałeś nie dozwolony operator. Podaj poprawy operator: + - * /");
-
-        }
-
+        //Przełącznik do wykonywanych obliczeń
+        double suma = switch (operator) {
+            case 1 -> liczba1 + liczba2;
+            case 2 -> liczba1 - liczba2;
+            case 3 -> liczba1 * liczba2;
+            case 4 -> liczba1 / liczba2;
+            default -> 0;
+        };
+        System.out.println("Wynik:" + suma);
     }
 }
